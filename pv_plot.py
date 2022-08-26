@@ -35,8 +35,8 @@ for elongation in elongations:
                                                     'plots',
                                                     str(size))
                     #new_dir = 'D:/Taenite/jupyter/data_{}/E{}/plots/{}'.format(geometry, elongation, size)
-                groundstate_plot = os.path.join(groundstate_plots_dir,
-                                                '{}.png'.format(i))
+                #groundstate_plot = os.path.join(groundstate_plots_dir,
+                                                #'{}.png'.format(i))
                     #groundstate_plots_dir + '/{}.png'.format(i)
                     # if os.path.exists(finalpath):
                     # pass
@@ -318,69 +318,53 @@ for elongation in elongations:
                                             str(size))                        
                         #'D:/Taenite/jupyter/data_{}/E{}/plots/{}'.format(geometry, elongation, size)
                     if os.path.isdir(new_dir):
-                        finalpath = new_dir + '/{}.png'.format(i)
+                        filename = os.path.splitext(FILE)[0][:-5]
+                        if 'easy1' in filename:
+                            easy_dir = os.path.join(new_dir, 'easy1')
+                            if not os.path.isdir(easy_dir):
+                                os.mkdir(easy_dir)
+                        if 'easy2' in filename:
+                            easy_dir = os.path.join(new_dir, 'easy2')
+                            if not os.path.isdir(easy_dir):
+                                os.mkdir(easy_dir)
+                        if 'easy3' in filename:
+                            easy_dir = os.path.join(new_dir, 'easy3')
+                            if not os.path.isdir(easy_dir):
+                                os.mkdir(easy_dir)
+
+                        finalpath = os.path.join(easy_dir, filename + '.png')    
+                            #finalpath = new_dir + '/{}.png'.format(filename)
                         if not os.path.exists(finalpath):
                             SaveScreenshot(finalpath, magnification=3, quality=100, view=renderView1)
+                            i += 1
+                            Disconnect()
+                            Connect()
                     else:
                         os.mkdir(new_dir)
-                        finalpath = new_dir + '/{}.png'.format(i)
+                        filename = os.path.splitext(FILE)[0][:-5]
+                        if 'easy1' in filename:
+                            easy_dir = os.path.join(new_dir, 'easy1')
+                            if not os.path.isdir(easy_dir):
+                                os.mkdir(easy_dir)
+                        elif 'easy2' in filename:
+                            easy_dir = os.path.join(new_dir, 'easy2')
+                            if not os.path.isdir(easy_dir):
+                                os.mkdir(easy_dir)
+                        elif 'easy3' in filename:
+                            easy_dir = os.path.join(new_dir, 'easy3')
+                            if not os.path.isdir(easy_dir):
+                                os.mkdir(easy_dir)
+
+                        finalpath = os.path.join(easy_dir, filename + '.png')    
+                            #finalpath = new_dir + '/{}.png'.format(filename)
                         if not os.path.exists(finalpath):
                             SaveScreenshot(finalpath, magnification=3, quality=100, view=renderView1)
-
-                        #### saving camera placements for all active views
-
-                        # current camera placement for renderView1
-                    renderView1.CameraPosition = [0.05556550098723472, 0.017366116881115796,
-                                                    0.04346285949267097]
-                    renderView1.CameraFocalPoint = [-2.053845673799514e-05, 1.0849907994270245e-07,
-                                                    -5.292261059553153e-21]
-                    renderView1.CameraViewUp = [-0.11113589280628539, 0.963662653270126, -0.24290554547504817]
-                    renderView1.CameraParallelScale = 0.018807449139699183
-
-                        # set active source
-                    SetActiveSource(None)
-
-                        # set active view
-                    SetActiveView(None)
-
-                    CreateLayout('Layout #1')
-
-                        # Create a new 'Render View'
-                    renderView1_1 = CreateView('RenderView')
-                    renderView1_1.ViewSize = [995, 541]
-                    renderView1_1.AxesGrid = 'GridAxes3DActor'
-                    renderView1_1.OrientationAxesLabelColor = [0.0, 0.0, 0.0]
-                    renderView1_1.StereoType = 0
-                    renderView1_1.Background = [1.0, 1.0, 1.0]
-
-                        # init the 'GridAxes3DActor' selected for 'AxesGrid'
-                    renderView1_1.AxesGrid.XTitleColor = [0.0, 0.0, 0.0]
-                    renderView1_1.AxesGrid.YTitleColor = [0.0, 0.0, 0.0]
-                    renderView1_1.AxesGrid.ZTitleColor = [0.0, 0.0, 0.0]
-                    renderView1_1.AxesGrid.XLabelColor = [0.0, 0.0, 0.0]
-                    renderView1_1.AxesGrid.YLabelColor = [0.0, 0.0, 0.0]
-                    renderView1_1.AxesGrid.ZLabelColor = [0.0, 0.0, 0.0]
-
-                        # get layout
-                    layout1 = GetLayout()
-
-                        # place view in the layout
-                    layout1.AssignView(0, renderView1_1)
-
-                        #### saving camera placements for all active views
-
-                        # current camera placement for renderView1_1
-
-                        #### uncomment the following to render all views
-                        # RenderAllViews()
-                        # alternatively, if you want to write images, you can use SaveScreenshot(...).
-                        ## os.chdir('d:/')
-                    i += 1
-                    Disconnect()
-                    Connect()
+                            i += 1
+                            Disconnect()
+                            Connect()
+                         
 
 
-# In[ ]:
 
 
 
