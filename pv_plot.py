@@ -4,7 +4,7 @@
 from paraview.simple import *
 import os
 
-sizes = [10] # diameter in nm
+sizes = [30] # diameter in nm
 
 elongations = [0] # elongations in %
 
@@ -12,7 +12,7 @@ elongations = [0] # elongations in %
 
 #geometry = "triaxial_ellipsoid"
 
-home = 'C:\\Users\\josea\\Desktop\\taenite_tetrataenite-main\\spheroid\\taenite0_tetrataenite100'
+home = 'C:\\Users\\josea\\Desktop\\Documents\\PhD\\swiss_cheese\\cubic\\0_holes_R1\\T20\\'
 
 ##C:\Users\josea\Desktop\Documents\PhD\Taenite_HighT\python_scripts\taenite_highT
 
@@ -20,8 +20,6 @@ for elongation in elongations:
     if elongation < 10:
         elongation = '0{}'.format(elongation)
     for size in sizes:            
-        home = os.path.join(home,
-                            'E{}'.format(elongation))
         groundstates_path = os.path.join(home,
                                         'groundstates',
                                         str(size))
@@ -315,54 +313,22 @@ for elongation in elongations:
 
                     new_dir = os.path.join(home,
                                             'plots',
-                                            str(size))                        
-                        #'D:/Taenite/jupyter/data_{}/E{}/plots/{}'.format(geometry, elongation, size)
-                    if os.path.isdir(new_dir):
-                        filename = os.path.splitext(FILE)[0][:-5]
-                        if 'easy1' in filename:
-                            easy_dir = os.path.join(new_dir, 'easy1')
-                            if not os.path.isdir(easy_dir):
-                                os.mkdir(easy_dir)
-                        if 'easy2' in filename:
-                            easy_dir = os.path.join(new_dir, 'easy2')
-                            if not os.path.isdir(easy_dir):
-                                os.mkdir(easy_dir)
-                        if 'easy3' in filename:
-                            easy_dir = os.path.join(new_dir, 'easy3')
-                            if not os.path.isdir(easy_dir):
-                                os.mkdir(easy_dir)
+                                            str(size))
 
-                        finalpath = os.path.join(easy_dir, filename + '.png')    
-                            #finalpath = new_dir + '/{}.png'.format(filename)
-                        if not os.path.exists(finalpath):
-                            SaveScreenshot(finalpath, magnification=3, quality=100, view=renderView1)
-                            i += 1
-                            Disconnect()
-                            Connect()
-                    else:
+                    if not os.path.isdir(new_dir):
                         os.mkdir(new_dir)
-                        filename = os.path.splitext(FILE)[0][:-5]
-                        if 'easy1' in filename:
-                            easy_dir = os.path.join(new_dir, 'easy1')
-                            if not os.path.isdir(easy_dir):
-                                os.mkdir(easy_dir)
-                        elif 'easy2' in filename:
-                            easy_dir = os.path.join(new_dir, 'easy2')
-                            if not os.path.isdir(easy_dir):
-                                os.mkdir(easy_dir)
-                        elif 'easy3' in filename:
-                            easy_dir = os.path.join(new_dir, 'easy3')
-                            if not os.path.isdir(easy_dir):
-                                os.mkdir(easy_dir)
 
-                        finalpath = os.path.join(easy_dir, filename + '.png')    
-                            #finalpath = new_dir + '/{}.png'.format(filename)
-                        if not os.path.exists(finalpath):
-                            SaveScreenshot(finalpath, magnification=3, quality=100, view=renderView1)
-                            i += 1
-                            Disconnect()
-                            Connect()
-                         
+                    filename = os.path.splitext(FILE)[0][:-5]
+
+                    finalpath = os.path.join(new_dir, filename + '.png')    
+                            
+                    if not os.path.exists(finalpath):
+                        SaveScreenshot(finalpath, magnification=3, quality=100, view=renderView1)
+                        i += 1
+                        Disconnect()
+                        Connect()
+                  
+                    
 
 
 
